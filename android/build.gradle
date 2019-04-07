@@ -15,8 +15,9 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.2'
-        classpath 'com.google.gms:google-services:3.2.1'
+        classpath 'com.android.tools.build:gradle:3.2.0'
+
+        classpath 'com.google.gms:google-services:4.2.0'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -32,16 +33,19 @@ allprojects {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url "$rootDir/../node_modules/react-native/android"
         }
-        //change 3
-           configurations.all {
-        resolutionStrategy {
-            force "com.google.android.gms:play-services-basement:$googlePlayServicesVersion"
-            force "com.google.android.gms:play-services-tasks:$googlePlayServicesVersion"
-            force "com.google.android.gms:play-services-measurement-base:16.0.0"
-            force "com.google.firebase:firebase-analytics:16.0.1"
-            force "com.google.firebase:firebase-analytics-impl:16.1.1"
+        maven {
+            url "https://maven.google.com"
         }
-      }
+        //change 3
+        /*configurations.all {
+            resolutionStrategy {
+                force "com.google.android.gms:play-services-basement:$googlePlayServicesVersion"
+                force "com.google.android.gms:play-services-tasks:$googlePlayServicesVersion"
+                force "com.google.android.gms:play-services-measurement-base:16.0.0"
+                force "com.google.firebase:firebase-analytics:16.0.1"
+                force "com.google.firebase:firebase-analytics-impl:16.1.1"
+            }
+        }*/
     }
 }
 
