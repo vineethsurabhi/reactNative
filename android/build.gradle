@@ -1,0 +1,54 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext {
+        buildToolsVersion = "28.0.2"
+        minSdkVersion = 16
+        compileSdkVersion = 28
+        targetSdkVersion = 27
+        supportLibVersion = "28.0.0"
+        //change 1
+        googlePlayServicesVersion = "15.0.1"
+    }
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath 'com.google.gms:google-services:3.2.1'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        mavenLocal()
+        google()
+        jcenter()
+        maven {
+            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+            url "$rootDir/../node_modules/react-native/android"
+        }
+        //change 3
+           configurations.all {
+        resolutionStrategy {
+            force "com.google.android.gms:play-services-basement:$googlePlayServicesVersion"
+            force "com.google.android.gms:play-services-tasks:$googlePlayServicesVersion"
+            force "com.google.android.gms:play-services-measurement-base:16.0.0"
+            force "com.google.firebase:firebase-analytics:16.0.1"
+            force "com.google.firebase:firebase-analytics-impl:16.1.1"
+        }
+      }
+    }
+}
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.7'
+    distributionUrl = distributionUrl.replace("bin", "all")
+}
+//change 2
+// com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true
